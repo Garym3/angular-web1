@@ -29,3 +29,11 @@ test('Pikachu should have lost', () => {
     expect(fight.isOver).toBe(true)
     expect(fight.winner === charizard).toBe(true)
 });
+
+test('No riposte before fight has started', () => {
+    const pickachu = new Pokemon("Pikachu", 100, 90, 50, 40, 50, 50);
+    const charizard = new Pokemon("Charizard", 100, 100, 109, 78, 85, 109);
+    const fight = new Fight(pickachu, charizard);
+
+    expect(fight.riposte()).toBe(true)
+});
