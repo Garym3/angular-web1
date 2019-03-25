@@ -1,0 +1,14 @@
+{
+    "compilerOptions": {
+        "outDir": "./build",
+        "allowJs": true,
+        "target": "es5",
+        "types": [
+            "node",
+            "jest"
+        ]
+    },
+    "include": [
+        "./src/**/*"
+    ]
+}
