@@ -5,6 +5,7 @@ export class Fight {
     secondPokemon: Pokemon
     winner: Pokemon
     hasStarted: boolean
+    isOver: boolean
 
     constructor(firstPokemon: Pokemon, secondPokemon: Pokemon){
         this.firstPokemon = firstPokemon
@@ -25,26 +26,24 @@ export class Fight {
         return true;
     }
 
-    start(): boolean {
+    start() {
         if(this.hasStarted) {
             console.log("Fight has already started.");
-            return false;
+            return;
         }
 
         if(!this.checkPokemonsStats()) {
             console.log(`Attack didn't occurred as the combattants don't meet stats requirements.`)
-            return false;
+            return;
         }
 
         this.hasStarted = true;
 
         while(this.firstPokemon.health > 0 && this.secondPokemon.health > 0){
-            if(this.isWon()) return true;
+            if(this.isWon()) return;
 
             this.attackRound()
         }
-
-        return true;
     }
 
     attackRound(){
@@ -56,9 +55,13 @@ export class Fight {
     isWon(): boolean{
         if(this.firstPokemon.health <= 0) {
             this.winner = this.secondPokemon;
+            console.log(`${this.winner.name} wins!`);
+            this.isOver = true;
             return true;
         } else if(this.secondPokemon.health <= 0) {
             this.winner = this.firstPokemon;
+            console.log(`${this.winner.name} wins!`);
+            this.isOver = true;
             return true;
         }
 
@@ -66,7 +69,7 @@ export class Fight {
     }
 
     firstAttack(){
-        if(!this.hasStarted) return;
+        this.hasStarted = true;
 
         if(this.firstPokemon.speed >= this.secondPokemon.speed) {
             this.secondPokemon.health -= this.firstPokemon.attack

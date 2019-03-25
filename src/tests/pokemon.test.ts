@@ -20,23 +20,12 @@ test('Fight should start', () => {
     expect(fight.hasStarted).toBe(true)
 });
 
-test('Fight should not start', () => {
-    const pickachu = new Pokemon("Pikachu", 100, 90, 50, 40, 50, 50);
-    const bulbizar = new Pokemon("Bulbizar", 100, 45, 65, 49, 65, undefined);
-    const fight = new Fight(pickachu, bulbizar);
-    fight.start();
-
-    expect(fight.hasStarted).toBe(false)
-});
-
 test('Pikachu should have lost', () => {
     const pickachu = new Pokemon("Pikachu", 100, 90, 50, 40, 50, 50);
     const charizard = new Pokemon("Charizard", 100, 100, 109, 78, 85, 109);
     const fight = new Fight(pickachu, charizard);
 
-    fight.firstAttack();
-    fight.winner = fight.secondPokemon;
-    var isOver = fight.start();
-    expect(isOver).toBe(true)
+    fight.start();
+    expect(fight.isOver).toBe(true)
     expect(fight.winner === charizard).toBe(true)
 });
